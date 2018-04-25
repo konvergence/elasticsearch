@@ -1,0 +1,4 @@
+http.host: 0.0.0.0
+http.port: ${ES_PORT}
+http.cors.enabled : true
+http.cors.allow-origin : "*"

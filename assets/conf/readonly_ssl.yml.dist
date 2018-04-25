@@ -1,0 +1,42 @@
+readonlyrest:
+    ssl:
+      enable: true
+      keystore_file: "../${KEYSTORE_FILE_PATH}"
+      keystore_pass: ${KEYSTORE_PASSWORD}
+      key_pass: ${KEY_PASSWORD}
+    
+   
+    response_if_req_forbidden: Request forbiden contact ES cluster administrator
+    
+    access_control_rules:
+      
+    - name: Full access from users in group ES_ADMIN
+      groups: ["ES ADMINS"]
+      indices: ["*"]
+    
+    - name: Read only users
+      groups: ["READ ONLY"]
+      actions: ["indices:data/read/*"]
+    
+    - name: "Block 1 - Blocking everything from a network"
+      type: forbid
+      hosts: ["10.0.0.0/24"]
+    
+    - name: "::LOGSTASH::"
+      auth_key_sha256: "280ac6f756a64a80143447c980289e7e4c6918b92588c8095c7c3f049a13fbf9" #logstash:logstash
+      actions: ["cluster:monitor/main","indices:data/read/*","indices:admin/*","indices:data/write/*"]
+      indices: ["*"]
+     
+    - name: "::GRAFANA::"
+      auth_key_sha256: "922cd2aa2e6eb5062fa3fb7b5e84240b3bd6a9832432b388b41e8fe2d798ba03" #grafana:grafana 
+      actions: ["cluster:monitor/main","indices:data/read/*","indices:admin/*"]
+      indices: ["*"]    
+       
+    users:
+    - username: ${CLUSTER_ADMIN}
+      auth_key: ${CLUSTER_ADMIN}:${ADMIN_PASS}
+      groups: ["ES ADMINS"]
+    
+    - username: ${RO_USER}
+      auth_key: ${RO_USER}:${RO_PASS}
+      groups: ["READ ONLY"]

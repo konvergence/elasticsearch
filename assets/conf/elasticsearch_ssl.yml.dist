@@ -1,0 +1,6 @@
+http.type: ssl_netty4 
+http.port: ${ES_PORT}
+http.host: 0.0.0.0
+http.cors.enabled : true
+http.cors.allow-origin : "*"
+
