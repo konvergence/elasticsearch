@@ -25,8 +25,11 @@ ENV SSL_ENABLE=true \
 	CLUSTER_ADMIN=es_admin \
 	ADMIN_PASS=passwadmin \
 	RO_USER=es_ro \
-	RO_PASS=password 
-	
+	RO_PASS=password \
+	GRAFANA_USER=grafana \
+	GRAFANA_PASS=grafana \
+	LOGSTASH_USER=logstash \
+	LOGSTASH_PASS=logstash
 # install readonlyrest plugin . see https://readonlyrest.com
 RUN bin/elasticsearch-plugin install file:///usr/share/elasticsearch/assets/plugins/readonlyrest-1.16.18_es5.4.3.zip # NOTICE : can't use WORKDIR as variable in path like file:///WORKDIR/assets..
 	
