@@ -23,12 +23,12 @@ readonlyrest:
       hosts: ["10.0.0.0/24"]
     
     - name: "::LOGSTASH::"
-      auth_key_sha256: "280ac6f756a64a80143447c980289e7e4c6918b92588c8095c7c3f049a13fbf9" #logstash:logstash
+      auth_key: ${LOGSTASH_USER}:${LOGSTASH_PASS}
       actions: ["cluster:monitor/main","indices:data/read/*","indices:admin/*","indices:data/write/*"]
       indices: ["*"]
      
     - name: "::GRAFANA::"
-      auth_key_sha256: "922cd2aa2e6eb5062fa3fb7b5e84240b3bd6a9832432b388b41e8fe2d798ba03" #grafana:grafana 
+      auth_key: ${GRAFANA_USER}:${GRAFANA_PASS}
       actions: ["cluster:monitor/main","indices:data/read/*","indices:admin/*"]
       indices: ["*"]    
        

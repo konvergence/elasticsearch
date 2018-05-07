@@ -16,18 +16,17 @@ readonlyrest:
       type: forbid
       hosts: ["10.0.0.0/24"]
     
-	
-	- name: "::LOGSTASH::"
+    - name: "::LOGSTASH::"
       auth_key: ${LOGSTASH_USER}:${LOGSTASH_PASS}
       actions: ["cluster:monitor/main","indices:admin/types/exists","indices:data/read/*","indices:data/write/*","indices:admin/template/*","indices:admin/create"]
       indices: ["*"]
-	  
-	- name: "::GRAFANA::"
+    
+    - name: "::GRAFANA::"
       auth_key: ${GRAFANA_USER}:${GRAFANA_PASS}
       actions: ["cluster:monitor/main","indices:admin/types/exists","indices:data/read/*","indices:admin/template/*"]
       indices: ["*"]
     
-	users:
+    users:
     - username: ${CLUSTER_ADMIN}
       auth_key: ${CLUSTER_ADMIN}:${ADMIN_PASS}
       groups: ["ES ADMINS"]
