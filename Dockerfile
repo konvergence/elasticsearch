@@ -1,5 +1,12 @@
 FROM elasticsearch:5.4.3
-MAINTAINER slaheddinne.ahmed@kshuttle.io
+
+# Image Label
+LABEL maintainer="kshuttle.io" \
+      website="https://kshuttle.io" \
+      description="elasticsearch 5.4 with ReadonlyREST plugin" \
+      release="5.4.3" 
+	  
+
 
 #install envsubst from gettext-base package then clear cache
 RUN apt-get update \
